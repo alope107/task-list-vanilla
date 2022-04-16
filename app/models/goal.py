@@ -23,7 +23,7 @@ class Goal:
     @classmethod
     def fetch_all(cls):
         rows = Goal.db.query("""SELECT id, title, due_date
-                                  FROM Goal""")
+                                FROM Goal""")
         goals = []
         for id, title, due_date in rows:
             goals.append(cls(id, title, due_date))

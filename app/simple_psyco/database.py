@@ -1,5 +1,9 @@
 import atexit
+import importlib.resources as pkg_resources
+
 import psycopg2
+
+import static
 
 def _init_database(dbname, user):
     db = psycopg2.connect(f"dbname='{dbname}' user='{user}'")
@@ -21,3 +25,7 @@ class Database:
         finally:
             cur.close()
         return rows
+    
+    def clear_db(self):
+        clear_db = pkg_resources.read_text(static, 'clear_db.sql')
+        self.query(clear_db)
