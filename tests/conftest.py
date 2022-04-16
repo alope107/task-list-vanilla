@@ -3,7 +3,6 @@ import pytest
 import importlib.resources as pkg_resources
 
 from app import create_app, schemas
-from tests import static_sql
 
 def init_db(db):
     create_goal_table = pkg_resources.read_text(schemas, 'schemas.sql')
@@ -25,10 +24,12 @@ def app(app_config):
         "TESTING": True,
     })
 
-    clear_db(app.db)
-    init_db(app.db)
+    db = app.db
+
+    db.clear_db()
+    init_db(db)
     yield app
-    clear_db(app.db)
+    db.clear_db()
 
 @pytest.fixture
 def client(app):

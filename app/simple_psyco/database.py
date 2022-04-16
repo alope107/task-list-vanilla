@@ -3,7 +3,7 @@ import importlib.resources as pkg_resources
 
 import psycopg2
 
-import static
+from . import static
 
 def _init_database(dbname, user):
     db = psycopg2.connect(f"dbname='{dbname}' user='{user}'")
