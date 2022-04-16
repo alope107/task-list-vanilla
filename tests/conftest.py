@@ -1,6 +1,6 @@
-import pytest
-
 import importlib.resources as pkg_resources
+
+import pytest
 
 from app import create_app, schemas
 

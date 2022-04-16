@@ -25,7 +25,7 @@ class Database:
         finally:
             cur.close()
         return rows
-    
+
     def clear_db(self):
         clear_db = pkg_resources.read_text(static, 'clear_db.sql')
         self.query(clear_db)

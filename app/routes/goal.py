@@ -1,7 +1,6 @@
 from datetime import date
 
 from flask import Blueprint, jsonify
-from markupsafe import escape
 
 from app.models.goal import Goal
 
