@@ -14,7 +14,9 @@ class Database:
         cur = self._db.cursor()
         try:
             cur.execute(query, params)
-            rows = cur.fetchall()
+            rows = None
+            if cur.description is not None:
+                rows = cur.fetchall()
             self._db.commit()
         finally:
             cur.close()

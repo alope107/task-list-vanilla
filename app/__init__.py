@@ -21,4 +21,7 @@ def create_app(config=config):
     app = Flask(__name__)
     app.register_blueprint(goal_bp)
 
+    # Better way to do this with app context?
+    app.db = db
+
     return app

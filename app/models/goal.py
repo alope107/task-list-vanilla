@@ -8,6 +8,12 @@ class Goal:
 
     @classmethod
     def create_and_insert(cls, title, due_date=None):
+        try:
+            # If it's a datetime, it'll be converted to a date
+            due_date = due_date.date()
+        except AttributeError:
+            # If it's a date or None, the .date() method won't exist
+            pass
         result = Goal.db.query("""INSERT INTO Goal(title, due_date)
                                   VALUES (%s, %s) 
                                   RETURNING id""", (title, due_date))
@@ -25,3 +31,10 @@ class Goal:
 
     def __repr__(self):
         return f"Goal({self.id}, {self.title}, {self.due_date})"
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "due_date": self.due_date
+        }
